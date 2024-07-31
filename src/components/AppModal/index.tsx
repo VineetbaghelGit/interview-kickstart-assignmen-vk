@@ -44,7 +44,12 @@ function AppModal({
   handleClose,
   editableData,
 }: Readonly<AppModalPropsType>): JSX.Element {
-  const {webinarData, setWebinarData} = useWebinarContext();
+  const {
+    showWebinarData,
+    setShowWebinarData,
+    setAllWebinarDatas,
+    allWebinarDatas,
+  } = useWebinarContext();
 
   const formValidation = useFormik({
     initialValues: {
@@ -67,13 +72,25 @@ function AppModal({
       webinarTitle: Yup.string().required('Webinar title is required'),
       startDate: Yup.string().required('Start date is required'),
       startTime: Yup.string().required('Start time is required'),
-      endTime: Yup.string().required('End time is required'),
+      endTime: Yup.string()
+        .required('End time is required')
+        .test(
+          'end-time-after-start-time',
+          'End time must be after start time',
+          function (value) {
+            const {startTime} = this.parent;
+            if (startTime && value) {
+              return dayjs(value, 'HH:mm').isAfter(dayjs(startTime, 'HH:mm'));
+            }
+            return true;
+          },
+        ),
     }),
     onSubmit: async value => {
       try {
         if (editableData) {
           // Update existing webinar data
-          const updatedData = webinarData.map(data =>
+          const updatedData = showWebinarData.map(data =>
             data.id === editableData.id
               ? {
                   ...data,
@@ -88,7 +105,8 @@ function AppModal({
                 }
               : data,
           );
-          setWebinarData(updatedData);
+          setShowWebinarData(updatedData);
+          setAllWebinarDatas(updatedData);
           ToasterMessage(SUCCESS, 'Webinar updated successfully');
         } else {
           // Add new webinar data
@@ -103,8 +121,10 @@ function AppModal({
             startTime: value.startTime,
             endTime: value.endTime,
           };
-          setWebinarData([...webinarData, newWebinar]);
+          setShowWebinarData([...showWebinarData, newWebinar]);
+          setAllWebinarDatas([...allWebinarDatas, newWebinar]);
           ToasterMessage(SUCCESS, 'New webinar added!');
+          formValidation.resetForm();
         }
         handleClose();
       } catch (err: any) {
@@ -327,7 +347,6 @@ function AppModal({
                     <DemoContainer components={['DatePicker']}>
                       <DemoItem label="Start Date">
                         <DatePicker
-                          // value={formValidation.values.startDate}
                           value={
                             formValidation.values.startDate
                               ? dayjs(
@@ -343,6 +362,7 @@ function AppModal({
                               formattedDate,
                             );
                           }}
+                          disablePast={true}
                           format="YYYY-MM-DD"
                         />
                       </DemoItem>
@@ -357,7 +377,7 @@ function AppModal({
                           ? 'error.main'
                           : 'text.secondary'
                       }
-                      sx={{marginTop: 1}}>
+                      sx={{marginTop: '3px', marginLeft: '10px'}}>
                       {formValidation.errors.startDate}
                     </Typography>
                   )}
@@ -395,7 +415,7 @@ function AppModal({
                           ? 'error.main'
                           : 'text.secondary'
                       }
-                      sx={{marginTop: 1}}>
+                      sx={{marginTop: '3px', marginLeft: '10px'}}>
                       {formValidation.errors.startTime}
                     </Typography>
                   )}
@@ -433,7 +453,7 @@ function AppModal({
                           ? 'error.main'
                           : 'text.secondary'
                       }
-                      sx={{marginTop: 1}}>
+                      sx={{marginTop: '3px', marginLeft: '10px'}}>
                       {formValidation.errors.endTime}
                     </Typography>
                   )}

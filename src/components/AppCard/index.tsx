@@ -24,12 +24,12 @@ function AppCard({
   singleWebinarDetail,
   index,
 }: Readonly<AppCardPropTypes>): JSX.Element {
-  const {webinarData, setWebinarData} = useWebinarContext();
+  const {showWebinarData, setShowWebinarData} = useWebinarContext();
   const [editableData, setEditableData] =
     useState<WebinarDetailsType>(defaultWebinar);
   const handleDeleteWebinar = (webinarId: string): void => {
-    const filteredData = webinarData.filter(data => data.id !== webinarId);
-    setWebinarData(filteredData);
+    const filteredData = showWebinarData.filter(data => data.id !== webinarId);
+    setShowWebinarData(filteredData);
     ToasterMessage(SUCCESS, 'Webinar deleted successfully!');
   };
   const [openModal, setOpenModal] = React.useState(false);

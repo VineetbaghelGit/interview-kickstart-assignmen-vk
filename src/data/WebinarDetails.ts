@@ -109,17 +109,6 @@ const WebinarDetails = [
     startTime: '09:00',
     endTime: '10:00',
   },
-  {
-    id: crypto.randomUUID(),
-    instructorName: 'Kara Lee',
-    instructorRole: 'Blockchain Developer',
-    instructorCompany: 'Ethereum',
-    topics: 'Blockchain',
-    webinarTitle: 'Introduction to Smart Contracts',
-    startDate: '2024-08-11',
-    startTime: '12:00',
-    endTime: '13:00',
-  },
 ];
 
 export default WebinarDetails;
