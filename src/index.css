@@ -1,13 +1,63 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif !important;
+}
+a {
+  text-decoration: none !important;
+}
+.css-q78dgc-MuiContainer-root{
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+form .MuiInputBase-sizeSmall.form_inputs {
+  border: 1px solid #e3e7ec !important;
+  border-radius: 10px !important;
+  background-color: #f2f4f8;
+  color: #000 !important;
+  height: 45px;
+  font-size: 14px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
+  font-size: 13px;
+  margin: 10px 0px;
+  color: #000;
+  font-weight: 550;
 }
+.date_time_picker p {
+  font-size: 13px;
+  color: #000;
+  font-weight: 550;
+}
+.date_time_picker .css-nsl34v.MuiTextField-root {
+  margin: 0;
+}
+.date_time_picker > div > div > div > div {
+  border: 1px solid #e3e7ec !important;
+  border-radius: 10px !important;
+  background-color: #f2f4f8;
+  color: #000 !important;
+  height: 45px;
+  font-size: 14px;
+}
+.date_time_picker .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:hover {
+  height: 45px;
+  font-size: 14px;
+  outline: none !important;
+}
+.date_time_picker
+  .MuiTypography-root.MuiTypography-body2.css-vx71s7-MuiTypography-root {
+  color: #d32f2f;
+  margin-top: 8px;
+}
+/* .form_inputs .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+  color: #000;
+  top: -4px;
+  font-size: 14px;
+}
+.form_inputs .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  height: 10px;
+} */
