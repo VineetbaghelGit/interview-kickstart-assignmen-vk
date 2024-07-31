@@ -139,7 +139,7 @@ function AppModal({
       sx={{width: '100%'}}
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description">
-      <Box sx={style}>
+      <Box sx={style} className="modal_container">
         <Box
           className="modal_header"
           sx={{
@@ -165,7 +165,9 @@ function AppModal({
             sx={{
               '& .MuiTextField-root': {m: 1, width: '28ch'},
             }}>
-            <Box sx={{display: 'flex', gap: '30px', padding: '14px 22px'}}>
+            <Box
+              className="instructor_details"
+              sx={{display: 'flex', gap: '30px', padding: '14px 22px'}}>
               <PeopleAltOutlinedIcon
                 sx={{color: '#444952', fontSize: '24px'}}
               />
@@ -222,7 +224,9 @@ function AppModal({
                     }
                   />
                 </FormControl>
-                <Box sx={{display: 'flex', gap: '30px'}}>
+                <Box
+                  className="instructor_details_topic"
+                  sx={{display: 'flex', gap: '30px'}}>
                   <FormControl
                     sx={{marginTop: '7px', display: 'block', flex: '1'}}>
                     <InputTextField
@@ -275,6 +279,7 @@ function AppModal({
               </Box>
             </Box>
             <Box
+              className="instructor_details"
               sx={{
                 display: 'flex',
                 gap: '30px',
@@ -438,6 +443,7 @@ function AppModal({
           </Box>
         </Box>
         <Box
+          className="modal_footer_section"
           sx={{
             padding: '14px 22px',
             borderTop: '1px solid #E3E7EC',

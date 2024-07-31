@@ -53,11 +53,35 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   color: #d32f2f;
   margin-top: 8px;
 }
-/* .form_inputs .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
-  color: #000;
-  top: -4px;
-  font-size: 14px;
+@media (max-width: 767px){
+  .search_conatiner.css-1ksgk29, .select_box_conatiner.css-ufscxh{
+    width: 100% !important; 
+    margin-bottom: 10px;
+  }
+  .instructor_details{
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .instructor_details_topic{
+    flex-direction: column !important;
+    gap: 0px !important;
+  }
+  .modal_footer_section{
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .css-1m2ma82{
+    height: max-content !important;
+  }
+  .date_time_picker > div > div > div > div{
+    width: 65vw !important;
+    overflow: hidden !important;
+  }
+  .date_time_picker > div > div > div{
+    min-width: 0px !important;
+    width: 65vw !important;
+  }
+  .modal_container{
+    height: max-content !important;
+  }
 }
-.form_inputs .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-  height: 10px;
-} */

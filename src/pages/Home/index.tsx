@@ -12,7 +12,7 @@ function Home(): JSX.Element {
   const {webinarData, setWebinarData} = useWebinarContext();
 
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedTopic, setSelectedTopic] = useState<string>('');
+  const [selectedTopic, setSelectedTopic] = useState<string>('All');
 
   const filterWebinars = (
     webinars: WebinarDetailsType[],
@@ -26,7 +26,7 @@ function Home(): JSX.Element {
           typeof value === 'string' &&
           value.toLowerCase().includes(lowerCaseQuery),
       );
-      const matchesTopic = topic ? webinar.topics === topic : true;
+      const matchesTopic = topic === 'All' || webinar.topics === topic;
       return matchesSearchQuery && matchesTopic;
     });
   };

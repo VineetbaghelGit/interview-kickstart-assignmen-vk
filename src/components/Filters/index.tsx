@@ -41,6 +41,7 @@ function Filters({
         flexWrap: 'wrap',
       }}>
       <Box
+        className="search_conatiner"
         sx={{
           border: '1px solid #E3E7EC',
           borderRadius: '10px',
@@ -61,6 +62,7 @@ function Filters({
         />
       </Box>
       <Box
+        className="select_box_conatiner"
         sx={{
           width: '20%',
         }}>
