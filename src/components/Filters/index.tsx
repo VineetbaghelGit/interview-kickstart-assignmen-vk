@@ -11,17 +11,30 @@ function Filters({
   selectedTopic,
   setSelectedTopic,
 }: Readonly<FiltersPropsTypes>): JSX.Element {
-  const {webinarData} = useWebinarContext();
+  const {allWebinarDatas} = useWebinarContext();
   const [topicsList, setTopicsList] = useState<string[]>([]);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] =
+    useState<string>(searchQuery);
 
   useEffect(() => {
-    if (webinarData) {
+    if (allWebinarDatas) {
       const uniqueTopics = Array.from(
-        new Set(webinarData.map(data => data.topics)),
+        new Set(allWebinarDatas.map(data => data.topics)),
       );
       setTopicsList(uniqueTopics);
     }
-  }, []);
+  }, [allWebinarDatas]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setSearchQuery(debouncedSearchQuery);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [debouncedSearchQuery, setSearchQuery]);
+
   const handleTopicChange = (event: SelectChangeEvent<string>): void => {
     setSelectedTopic(event.target.value);
   };
@@ -29,7 +42,7 @@ function Filters({
   const handleSearchChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
-    setSearchQuery(event.target.value);
+    setDebouncedSearchQuery(event.target.value);
   };
 
   return (
@@ -55,7 +68,7 @@ function Filters({
         </IconButton>
         <InputBase
           onChange={handleSearchChange}
-          value={searchQuery}
+          value={debouncedSearchQuery}
           sx={{ml: 1, flex: 1, fontSize: '14px'}}
           placeholder="Search for webinar"
           inputProps={{'aria-label': 'Search for webinar'}}

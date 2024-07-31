@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {Grid, Typography} from '@mui/material';
 import AppCard from 'components/AppCard';
@@ -5,11 +6,11 @@ import Filters from 'components/Filters';
 import Header from 'components/Header';
 import {type WebinarDetailsType} from 'configs/appTypes';
 import {useWebinarContext} from 'context/WebinarContext';
-import WebinarDetails from 'data/WebinarDetails';
 import React, {useEffect, useState} from 'react';
 
 function Home(): JSX.Element {
-  const {webinarData, setWebinarData} = useWebinarContext();
+  const {showWebinarData, setShowWebinarData, allWebinarDatas} =
+    useWebinarContext();
 
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedTopic, setSelectedTopic] = useState<string>('All');
@@ -33,17 +34,17 @@ function Home(): JSX.Element {
 
   useEffect(() => {
     let updatedWebinars = filterWebinars(
-      WebinarDetails,
+      allWebinarDatas,
       searchQuery,
       selectedTopic,
     );
 
     if (searchQuery === '' && selectedTopic === 'All') {
-      updatedWebinars = WebinarDetails;
+      updatedWebinars = allWebinarDatas;
     }
 
-    setWebinarData(updatedWebinars);
-  }, [searchQuery, selectedTopic, setWebinarData]);
+    setShowWebinarData(updatedWebinars);
+  }, [searchQuery, selectedTopic, setShowWebinarData]);
   return (
     <React.Fragment>
       <Header />
@@ -54,8 +55,8 @@ function Home(): JSX.Element {
         setSelectedTopic={setSelectedTopic}
       />
       <Grid container spacing={3}>
-        {webinarData.length > 0 ? (
-          webinarData.map((webinar, index) => {
+        {showWebinarData?.length > 0 ? (
+          showWebinarData?.map((webinar, index) => {
             return (
               <Grid key={webinar.id} item sm={6} md={4}>
                 <AppCard singleWebinarDetail={webinar} index={index} />

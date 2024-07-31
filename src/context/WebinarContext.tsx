@@ -9,8 +9,14 @@ import React, {
 } from 'react';
 
 interface WebinarContextType {
-  webinarData: WebinarDetailsType[];
-  setWebinarData: React.Dispatch<React.SetStateAction<WebinarDetailsType[]>>;
+  showWebinarData: WebinarDetailsType[];
+  setShowWebinarData: React.Dispatch<
+    React.SetStateAction<WebinarDetailsType[]>
+  >;
+  allWebinarDatas: WebinarDetailsType[];
+  setAllWebinarDatas: React.Dispatch<
+    React.SetStateAction<WebinarDetailsType[]>
+  >;
 }
 
 const WebinarContext = createContext<WebinarContextType | undefined>(undefined);
@@ -20,11 +26,19 @@ export const WebinarProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  const [webinarData, setWebinarData] =
+  const [showWebinarData, setShowWebinarData] =
+    useState<WebinarDetailsType[]>(WebinarDetails);
+  const [allWebinarDatas, setAllWebinarDatas] =
     useState<WebinarDetailsType[]>(WebinarDetails);
 
   return (
-    <WebinarContext.Provider value={{webinarData, setWebinarData}}>
+    <WebinarContext.Provider
+      value={{
+        showWebinarData,
+        setShowWebinarData,
+        setAllWebinarDatas,
+        allWebinarDatas,
+      }}>
       {children}
     </WebinarContext.Provider>
   );
