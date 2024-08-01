@@ -30,11 +30,15 @@ function AppCard({
   singleWebinarDetail,
   index,
 }: Readonly<AppCardPropTypes>): JSX.Element {
-  const {showWebinarData, setShowWebinarData} = useWebinarContext(); // Destructuring context values
+  const {
+    showWebinarData,
+    setShowWebinarData,
+    allWebinarDatas,
+    setAllWebinarDatas,
+  } = useWebinarContext(); // Destructuring context values
   const [editableData, setEditableData] =
     useState<WebinarDetailsType>(defaultWebinar); // State for editable webinar data
   const [openModal, setOpenModal] = useState(false); // State for modal visibility
-
   /**
    * Handles the deletion of a webinar.
    *
@@ -45,7 +49,11 @@ function AppCard({
       const filteredData = showWebinarData.filter(
         data => data.id !== webinarId,
       );
+      const allfilteredData = allWebinarDatas.filter(
+        data => data.id !== webinarId,
+      );
       setShowWebinarData(filteredData);
+      setAllWebinarDatas(allfilteredData);
       ToasterMessage(SUCCESS, 'Webinar deleted successfully!');
     },
     [showWebinarData, setShowWebinarData],
@@ -123,7 +131,11 @@ function AppCard({
               borderRadius: '16px',
               boxShadow: '0px 20px 46px -24px rgba(0, 0, 0, 0.2)',
             }}
-            image={UserImages[userImgIndex]}
+            image={
+              singleWebinarDetail?.image?.trim()
+                ? singleWebinarDetail.image
+                : UserImages[userImgIndex]
+            }
             alt="Instructor image"
           />
         </Box>

@@ -18,6 +18,7 @@ export interface WebinarDetailsType {
   startDate: string;
   startTime: string;
   endTime: string;
+  image?: string;
 }
 export interface AppCardPropTypes {
   singleWebinarDetail: WebinarDetailsType;

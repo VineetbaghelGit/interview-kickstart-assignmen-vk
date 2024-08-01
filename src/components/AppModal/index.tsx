@@ -28,7 +28,7 @@ const style = {
   border: '1px solid #E3E7EC',
   boxShadow: 24,
   borderRadius: '16px',
-  height: '83vh',
+  height: 'max-content',
 };
 
 /**
@@ -62,6 +62,7 @@ function AppModal({
       startDate: editableData?.startDate ?? '',
       startTime: editableData?.startTime ?? '',
       endTime: editableData?.endTime ?? '',
+      image: editableData?.image ?? '',
     },
     validationSchema: Yup.object().shape({
       instructorName: Yup.string().required('Instructor name is required'),
@@ -103,6 +104,7 @@ function AppModal({
                   startDate: value.startDate,
                   startTime: value.startTime,
                   endTime: value.endTime,
+                  image: value.image ?? '',
                 }
               : data,
           );
@@ -121,6 +123,7 @@ function AppModal({
             startDate: value.startDate,
             startTime: value.startTime,
             endTime: value.endTime,
+            image: value.image ?? '', // Include the image data
           };
           setShowWebinarData([...showWebinarData, newWebinar]);
           setAllWebinarDatas([...allWebinarDatas, newWebinar]);
@@ -152,6 +155,7 @@ function AppModal({
         startDate: editableData.startDate,
         startTime: editableData.startTime,
         endTime: editableData.endTime,
+        image: editableData.image ?? '',
       });
     }
   }, [editableData]);

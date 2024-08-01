@@ -2,7 +2,7 @@
 
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import VideoCameraBackOutlinedIcon from '@mui/icons-material/VideoCameraBackOutlined';
-import {FormControl} from '@mui/material';
+import {FormControl, Grid} from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
@@ -15,6 +15,30 @@ import dayjs from 'dayjs';
 import * as React from 'react';
 
 const ModalBody = ({formValidation}: any): JSX.Element => {
+  const [instructorImage, setInstructorImage] = React.useState<string | null>(
+    null,
+  );
+
+  const handleImageChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const imageUrl = e.target?.result as string;
+        setInstructorImage(imageUrl);
+        formValidation.setFieldValue('image', imageUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  React.useEffect(() => {
+    // Update image state if formValidation has image value
+    setInstructorImage(formValidation.values.image || null);
+  }, [formValidation.values.image]);
+
   return (
     <Box className="modal_body">
       <Box
@@ -34,108 +58,160 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
               sx={{fontSize: '18px', fontWeight: '550'}}>
               Instructor Details
             </Typography>
-
-            {/* Instructor Name Input */}
-            <FormControl sx={{marginTop: '7px', display: 'block'}}>
-              <InputTextField
-                id="instructorName"
-                name="instructorName"
-                label="Instructor Name"
-                type="text"
-                value={formValidation.values.instructorName}
-                placeholder="Type the instructor name"
-                onChange={formValidation.handleChange}
-                onBlur={formValidation.handleBlur}
-                className="form_inputs"
-                size="small"
-                error={
-                  (formValidation.touched.instructorName ?? false) &&
-                  Boolean(formValidation.errors.instructorName)
-                }
-                helperText={
-                  formValidation.touched.instructorName
-                    ? formValidation.errors.instructorName
-                    : undefined
-                }
-              />
-            </FormControl>
-
-            {/* Instructor Role Input */}
-            <FormControl sx={{marginTop: '7px', display: 'block'}}>
-              <InputTextField
-                id="instructorRole"
-                name="instructorRole"
-                label="Instructor Role"
-                type="text"
-                placeholder="Type the instructor role"
-                value={formValidation.values.instructorRole}
-                onChange={formValidation.handleChange}
-                onBlur={formValidation.handleBlur}
-                className="form_inputs"
-                size="small"
-                error={
-                  (formValidation.touched.instructorRole ?? false) &&
-                  Boolean(formValidation.errors.instructorRole)
-                }
-                helperText={
-                  formValidation.touched.instructorRole
-                    ? formValidation.errors.instructorRole
-                    : undefined
-                }
-              />
-            </FormControl>
-
-            {/* Instructor Company and Topics Inputs */}
-            <Box
-              className="instructor_details_topic"
-              sx={{display: 'flex', gap: '30px'}}>
-              <FormControl sx={{marginTop: '7px', display: 'block', flex: '1'}}>
-                <InputTextField
-                  id="instructorCompany"
-                  name="instructorCompany"
-                  label="Instructor Company"
-                  type="text"
-                  placeholder="Type the instructor company"
-                  value={formValidation.values.instructorCompany}
-                  onChange={formValidation.handleChange}
-                  onBlur={formValidation.handleBlur}
-                  className="form_inputs"
-                  size="small"
-                  error={
-                    (formValidation.touched.instructorCompany ?? false) &&
-                    Boolean(formValidation.errors.instructorCompany)
-                  }
-                  helperText={
-                    formValidation.touched.instructorCompany
-                      ? formValidation.errors.instructorCompany
-                      : undefined
-                  }
-                />
-              </FormControl>
-              <FormControl sx={{marginTop: '7px', display: 'block', flex: '1'}}>
-                <InputTextField
-                  id="topics"
-                  name="topics"
-                  label="Topics"
-                  type="text"
-                  placeholder="Type the topics"
-                  value={formValidation.values.topics}
-                  onChange={formValidation.handleChange}
-                  onBlur={formValidation.handleBlur}
-                  className="form_inputs"
-                  size="small"
-                  error={
-                    (formValidation.touched.topics ?? false) &&
-                    Boolean(formValidation.errors.topics)
-                  }
-                  helperText={
-                    formValidation.touched.topics
-                      ? formValidation.errors.topics
-                      : undefined
-                  }
-                />
-              </FormControl>
-            </Box>
+            <Grid container spacing={2} sx={{alignItems: 'center'}}>
+              <Grid item md={6} className="form_inputs_grid">
+                {/* Instructor Name Input */}
+                <FormControl sx={{marginTop: '7px', display: 'block'}}>
+                  <InputTextField
+                    id="instructorName"
+                    name="instructorName"
+                    label="Instructor Name"
+                    type="text"
+                    value={formValidation.values.instructorName}
+                    placeholder="Type the instructor name"
+                    onChange={formValidation.handleChange}
+                    onBlur={formValidation.handleBlur}
+                    className="form_inputs"
+                    size="small"
+                    error={
+                      (formValidation.touched.instructorName ?? false) &&
+                      Boolean(formValidation.errors.instructorName)
+                    }
+                    helperText={
+                      formValidation.touched.instructorName
+                        ? formValidation.errors.instructorName
+                        : undefined
+                    }
+                  />
+                </FormControl>
+                {/* Instructor Role Input */}
+                <FormControl sx={{marginTop: '7px', display: 'block'}}>
+                  <InputTextField
+                    id="instructorRole"
+                    name="instructorRole"
+                    label="Instructor Role"
+                    type="text"
+                    placeholder="Type the instructor role"
+                    value={formValidation.values.instructorRole}
+                    onChange={formValidation.handleChange}
+                    onBlur={formValidation.handleBlur}
+                    className="form_inputs"
+                    size="small"
+                    error={
+                      (formValidation.touched.instructorRole ?? false) &&
+                      Boolean(formValidation.errors.instructorRole)
+                    }
+                    helperText={
+                      formValidation.touched.instructorRole
+                        ? formValidation.errors.instructorRole
+                        : undefined
+                    }
+                  />
+                </FormControl>
+                {/* Instructor Company and Topics Inputs */}
+              </Grid>
+              <Grid item md={6}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}>
+                  <Typography
+                    variant="h6"
+                    component="h2"
+                    sx={{
+                      fontSize: '14px',
+                      fontWeight: '550',
+                      marginBottom: '10px',
+                    }}>
+                    Instructor Image
+                  </Typography>
+                  <Box
+                    sx={{
+                      width: 100,
+                      height: 100,
+                      border: '1px dashed #ccc',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '10px',
+                      cursor: 'pointer',
+                    }}
+                    component="label">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      style={{display: 'none'}}
+                    />
+                    {instructorImage ? (
+                      <img
+                        src={instructorImage}
+                        alt="Instructor"
+                        style={{width: '100%', height: '100%'}}
+                      />
+                    ) : (
+                      <Typography sx={{color: '#ccc'}}>+</Typography>
+                    )}
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+            <Grid container spacing={2} sx={{alignItems: 'center'}}>
+              <Grid item md={6} className="form_inputs_grid">
+                <FormControl
+                  sx={{marginTop: '7px', display: 'block', flex: '1'}}>
+                  <InputTextField
+                    id="instructorCompany"
+                    name="instructorCompany"
+                    label="Instructor Company"
+                    type="text"
+                    placeholder="Type the instructor company"
+                    value={formValidation.values.instructorCompany}
+                    onChange={formValidation.handleChange}
+                    onBlur={formValidation.handleBlur}
+                    className="form_inputs"
+                    size="small"
+                    error={
+                      (formValidation.touched.instructorCompany ?? false) &&
+                      Boolean(formValidation.errors.instructorCompany)
+                    }
+                    helperText={
+                      formValidation.touched.instructorCompany
+                        ? formValidation.errors.instructorCompany
+                        : undefined
+                    }
+                  />
+                </FormControl>
+              </Grid>
+              {/* Instructor Name Input */}
+              <Grid item md={6} className="form_inputs_grid">
+                <FormControl sx={{display: 'block', flex: '1'}}>
+                  <InputTextField
+                    id="topics"
+                    name="topics"
+                    label="Topics"
+                    type="text"
+                    placeholder="Type the topics"
+                    value={formValidation.values.topics}
+                    onChange={formValidation.handleChange}
+                    onBlur={formValidation.handleBlur}
+                    className="form_inputs"
+                    size="small"
+                    error={
+                      (formValidation.touched.topics ?? false) &&
+                      Boolean(formValidation.errors.topics)
+                    }
+                    helperText={
+                      formValidation.touched.topics
+                        ? formValidation.errors.topics
+                        : undefined
+                    }
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
 

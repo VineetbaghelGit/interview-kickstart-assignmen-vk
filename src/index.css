@@ -92,6 +92,9 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   .modal_body {
     height: 65vh !important;
   }
+  .form_inputs_grid{
+    width: 100% !important;
+  }
 }
 @media (max-width: 576px) {
   .app_card {
