@@ -28,7 +28,7 @@ const style = {
   border: '1px solid #E3E7EC',
   boxShadow: 24,
   borderRadius: '16px',
-  height: '90vh',
+  height: '83vh',
 };
 
 /**
