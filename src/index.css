@@ -52,6 +52,10 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   .MuiTypography-root.MuiTypography-body2.css-1ypinnx-MuiTypography-root {
   color: #d32f2f;
 }
+.modal_body {
+  height: 400px !important;
+  overflow: auto !important;
+}
 @media (max-width: 767px) {
   .search_container,
   .select_box_container.css-ufscxh {
@@ -92,5 +96,10 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
 @media (max-width: 576px) {
   .app_card {
     width: 87vw !important;
+  }
+}
+@media (min-height: 800px) and (min-width: 768px) {
+  .modal_body {
+    height: max-content !important;
   }
 }

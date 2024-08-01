@@ -16,7 +16,7 @@ import * as React from 'react';
 
 const ModalBody = ({formValidation}: any): JSX.Element => {
   return (
-    <Box className="modal_body" sx={{height: '400px', overflow: 'auto'}}>
+    <Box className="modal_body">
       <Box
         component="form"
         sx={{
