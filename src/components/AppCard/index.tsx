@@ -6,40 +6,69 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from '@mui/material';
-import AppModal from 'components/AppModal';
-import {type AppCardPropTypes, type WebinarDetailsType} from 'configs/appTypes';
+} from '@mui/material'; // Importing Material-UI components
+import AppModal from 'components/AppModal'; // Importing AppModal component
+import {type AppCardPropTypes, type WebinarDetailsType} from 'configs/appTypes'; // Importing types from configs
 import {
   CardsColors,
   defaultWebinar,
   SUCCESS,
   UserImages,
-} from 'configs/constant';
-import {useWebinarContext} from 'context/WebinarContext';
-import formatDateTime from 'helpers/DateFormatter';
-import {ToasterMessage} from 'helpers/ToasterHelper';
-import React, {useState} from 'react';
+} from 'configs/constant'; // Importing constants
+import {useWebinarContext} from 'context/WebinarContext'; // Importing custom hook for Webinar context
+import formatDateTime from 'helpers/DateFormatter'; // Importing DateFormatter helper
+import {ToasterMessage} from 'helpers/ToasterHelper'; // Importing ToasterHelper
+import React, {useCallback, useState} from 'react'; // Importing React and hooks
 
+/**
+ * AppCard component to display webinar details in a card format.
+ *
+ * @param {AppCardPropTypes} props - The props for the AppCard component.
+ * @returns {JSX.Element} The rendered AppCard component.
+ */
 function AppCard({
   singleWebinarDetail,
   index,
 }: Readonly<AppCardPropTypes>): JSX.Element {
-  const {showWebinarData, setShowWebinarData} = useWebinarContext();
+  const {showWebinarData, setShowWebinarData} = useWebinarContext(); // Destructuring context values
   const [editableData, setEditableData] =
-    useState<WebinarDetailsType>(defaultWebinar);
-  const handleDeleteWebinar = (webinarId: string): void => {
-    const filteredData = showWebinarData.filter(data => data.id !== webinarId);
-    setShowWebinarData(filteredData);
-    ToasterMessage(SUCCESS, 'Webinar deleted successfully!');
-  };
-  const [openModal, setOpenModal] = React.useState(false);
-  const handleEditModalOpen = (data: WebinarDetailsType): void => {
+    useState<WebinarDetailsType>(defaultWebinar); // State for editable webinar data
+  const [openModal, setOpenModal] = useState(false); // State for modal visibility
+
+  /**
+   * Handles the deletion of a webinar.
+   *
+   * @param {string} webinarId - The ID of the webinar to be deleted.
+   */
+  const handleDeleteWebinar = useCallback(
+    (webinarId: string): void => {
+      const filteredData = showWebinarData.filter(
+        data => data.id !== webinarId,
+      );
+      setShowWebinarData(filteredData);
+      ToasterMessage(SUCCESS, 'Webinar deleted successfully!');
+    },
+    [showWebinarData, setShowWebinarData],
+  );
+
+  /**
+   * Opens the edit modal with the data of the selected webinar.
+   *
+   * @param {WebinarDetailsType} data - The data of the webinar to be edited.
+   */
+  const handleEditModalOpen = useCallback((data: WebinarDetailsType): void => {
     setOpenModal(true);
     setEditableData(data);
-  };
-  const handleClose = (): void => {
+  }, []);
+
+  /**
+   * Closes the edit modal.
+   */
+  const handleClose = useCallback((): void => {
     setOpenModal(false);
-  };
+  }, []);
+
+  // Calculate color and image index based on the card index
   const colorIndex = index % CardsColors.length;
   const userImgIndex = index % UserImages.length;
 
@@ -94,11 +123,10 @@ function AppCard({
               boxShadow: '0px 20px 46px -24px rgba(0, 0, 0, 0.2)',
             }}
             image={UserImages[userImgIndex]}
-            alt="Live from space album cover"
+            alt="Instructor image"
           />
         </Box>
         <Box sx={{margin: '16px 0px'}}>
-          {' '}
           <Typography
             gutterBottom
             variant="h5"

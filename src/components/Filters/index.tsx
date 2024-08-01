@@ -1,21 +1,28 @@
-import SearchIcon from '@mui/icons-material/Search';
-import {Box, FormControl, IconButton, InputBase, MenuItem} from '@mui/material';
-import Select, {type SelectChangeEvent} from '@mui/material/Select';
-import {type FiltersPropsTypes} from 'configs/appTypes';
-import {useWebinarContext} from 'context/WebinarContext';
+import SearchIcon from '@mui/icons-material/Search'; // Importing Search icon from Material-UI
+import {Box, FormControl, IconButton, InputBase, MenuItem} from '@mui/material'; // Importing Material-UI components
+import Select, {type SelectChangeEvent} from '@mui/material/Select'; // Importing Select component and type from Material-UI
+import {type FiltersPropsTypes} from 'configs/appTypes'; // Importing FiltersPropsTypes type
+import {useWebinarContext} from 'context/WebinarContext'; // Importing custom hook for Webinar context
 import React, {useEffect, useState} from 'react';
 
+/**
+ * Filters component for filtering webinars by search query and topic.
+ *
+ * @param {FiltersPropsTypes} props - The props for the Filters component.
+ * @returns {JSX.Element} The rendered Filters component.
+ */
 function Filters({
   searchQuery,
   setSearchQuery,
   selectedTopic,
   setSelectedTopic,
 }: Readonly<FiltersPropsTypes>): JSX.Element {
-  const {allWebinarDatas} = useWebinarContext();
-  const [topicsList, setTopicsList] = useState<string[]>([]);
+  const {allWebinarDatas} = useWebinarContext(); // Destructuring context values
+  const [topicsList, setTopicsList] = useState<string[]>([]); // State for the list of topics
   const [debouncedSearchQuery, setDebouncedSearchQuery] =
-    useState<string>(searchQuery);
+    useState<string>(searchQuery); // State for the debounced search query
 
+  // Effect to extract unique topics from the webinar data
   useEffect(() => {
     if (allWebinarDatas) {
       const uniqueTopics = Array.from(
@@ -25,20 +32,31 @@ function Filters({
     }
   }, [allWebinarDatas]);
 
+  // Effect to debounce the search query input
   useEffect(() => {
     const handler = setTimeout(() => {
       setSearchQuery(debouncedSearchQuery);
     }, 500);
 
     return () => {
-      clearTimeout(handler);
+      clearTimeout(handler); // Cleanup the timeout on unmount or when debouncedSearchQuery changes
     };
   }, [debouncedSearchQuery, setSearchQuery]);
 
+  /**
+   * Handles the change in the selected topic.
+   *
+   * @param {SelectChangeEvent<string>} event - The event triggered on changing the selected topic.
+   */
   const handleTopicChange = (event: SelectChangeEvent<string>): void => {
     setSelectedTopic(event.target.value);
   };
 
+  /**
+   * Handles the change in the search input.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The event triggered on changing the search input.
+   */
   const handleSearchChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
@@ -54,7 +72,7 @@ function Filters({
         flexWrap: 'wrap',
       }}>
       <Box
-        className="search_conatiner"
+        className="search_container"
         sx={{
           border: '1px solid #E3E7EC',
           borderRadius: '10px',
@@ -75,7 +93,7 @@ function Filters({
         />
       </Box>
       <Box
-        className="select_box_conatiner"
+        className="select_box_container"
         sx={{
           width: '20%',
         }}>

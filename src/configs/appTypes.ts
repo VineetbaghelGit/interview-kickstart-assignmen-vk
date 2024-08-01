@@ -52,3 +52,8 @@ export interface InputFieldProps
   readonly className?: any;
   readonly ref?: any;
 }
+export interface ModalFooterPropsTypes {
+  handleSubmit: () => void;
+  handleClose: () => void;
+  buttonText: string;
+}

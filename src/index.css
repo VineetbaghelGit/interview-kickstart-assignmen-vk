@@ -8,7 +8,7 @@
 a {
   text-decoration: none !important;
 }
-.css-q78dgc-MuiContainer-root {
+.app_container {
   padding-left: 24px !important;
   padding-right: 24px !important;
 }
@@ -53,10 +53,10 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   color: #d32f2f;
 }
 @media (max-width: 767px) {
-  .search_conatiner.css-1ksgk29,
-  .select_box_conatiner.css-ufscxh {
+  .search_container,
+  .select_box_container.css-ufscxh {
     width: 100% !important;
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
   }
   .instructor_details {
     flex-direction: column !important;
@@ -74,14 +74,18 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
     height: max-content !important;
   }
   .date_time_picker > div > div > div > div {
-    width: 65vw !important;
+    width: 75vw !important;
     overflow: hidden !important;
   }
   .date_time_picker > div > div > div {
     min-width: 0px !important;
-    width: 65vw !important;
+    width: 75vw !important;
   }
   .modal_container {
     height: max-content !important;
+    width: 90vw !important;
+  }
+  .modal_body{
+    height: 70vh !important;
   }
 }

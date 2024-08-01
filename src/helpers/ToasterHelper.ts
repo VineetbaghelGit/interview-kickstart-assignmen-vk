@@ -7,18 +7,26 @@ import {
   type ToastTransition,
 } from 'react-toastify';
 
+/**
+ * Options for configuring toast notifications.
+ * @interface ToastOptions
+ */
 interface ToastOptions {
-  position: ToastPosition;
-  autoClose: number;
-  hideProgressBar: boolean;
-  closeOnClick: boolean;
-  pauseOnHover: boolean;
-  draggable: boolean;
-  progress?: number;
-  theme: Theme;
-  transition: ToastTransition;
+  position: ToastPosition; // Position where the toast notification appears
+  autoClose: number; // Duration in milliseconds before the toast automatically closes
+  hideProgressBar: boolean; // Whether to hide the progress bar
+  closeOnClick: boolean; // Whether clicking on the toast dismisses it
+  pauseOnHover: boolean; // Whether hovering over the toast pauses auto-close
+  draggable: boolean; // Whether the toast is draggable
+  progress?: number; // Progress value for controlled progress bar
+  theme: Theme; // Theme of the toast notification
+  transition: ToastTransition; // Transition effect when showing/hiding the toast
 }
 
+/**
+ * Default options for toast notifications.
+ * @constant {ToastOptions}
+ */
 const defaultToastOptions: ToastOptions = {
   position: 'top-right',
   autoClose: 1000,
@@ -29,6 +37,12 @@ const defaultToastOptions: ToastOptions = {
   theme: 'light',
   transition: Slide,
 };
+
+/**
+ * Displays a toast message based on the provided type.
+ * @param {string} type - Type of toast message ('SUCCESS', 'ERROR', 'WARNING').
+ * @param {string} message - Message content to display in the toast.
+ */
 function ToasterMessage(type: string, message: string): void {
   switch (type) {
     case SUCCESS:
@@ -44,4 +58,5 @@ function ToasterMessage(type: string, message: string): void {
       break;
   }
 }
+
 export {ToasterMessage};

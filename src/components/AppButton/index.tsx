@@ -1,7 +1,16 @@
-import {Button} from '@mui/material';
-import {type AppButtonProps} from 'configs/appTypes';
+import {Button} from '@mui/material'; // Importing Material-UI Button component
+import {type AppButtonProps} from 'configs/appTypes'; // Importing the type for component props
 import React from 'react';
 
+/**
+ * AppButton component to render a styled button.
+ *
+ * @param {AppButtonProps} props - The props for the AppButton component.
+ * @param {React.ReactNode} props.children - The content to be displayed inside the button.
+ * @param {() => void} props.onClick - The function to be called when the button is clicked.
+ * @param {string} props.type - The type of the button (e.g., 'button', 'submit').
+ * @returns {JSX.Element} The rendered AppButton component.
+ */
 function AppButton({
   children,
   onClick,
@@ -25,8 +34,9 @@ function AppButton({
           backgroundColor: '#2f67ef',
         },
       }}
-      onClick={onClick}>
-      {children}
+      onClick={onClick} // Function to be called on button click
+    >
+      {children} {/* The content inside the button */}
     </Button>
   );
 }
