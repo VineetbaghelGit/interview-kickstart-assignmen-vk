@@ -74,6 +74,7 @@ function AppCard({
 
   return (
     <Card
+      className="app_card"
       sx={{
         maxWidth: 400,
         padding: '16px',
