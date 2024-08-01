@@ -2,8 +2,13 @@ import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import {alpha, styled} from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import {type InputFieldProps} from 'configs/appTypes';
 import React from 'react';
 
+/**
+ * Styled wrapper for custom input components.
+ * This component wraps the input field with a label and helper text.
+ */
 const CustomInputWrapper = styled(Box)(({theme}) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -11,7 +16,11 @@ const CustomInputWrapper = styled(Box)(({theme}) => ({
   width: '100%', // Ensure the wrapper takes full width
 }));
 
-const BootstrapInput = styled(InputBase)(({theme}) => ({
+/**
+ * Styled input component using Material-UI's InputBase.
+ * It provides customized styling for the input field.
+ */
+const InputField = styled(InputBase)(({theme}) => ({
   borderRadius: 4,
   position: 'relative',
   backgroundColor: theme.palette.mode === 'light' ? '#F3F6F9' : '#1A2027',
@@ -43,22 +52,30 @@ const BootstrapInput = styled(InputBase)(({theme}) => ({
   },
 }));
 
-interface CustomInputProps {
-  id: string;
-  name: string;
-  label: string;
-  placeholder?: string;
-  required?: boolean;
-  type: string;
-  size?: 'small' | 'medium';
-  value?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  error?: boolean;
-  helperText?: string;
-  className: string;
-}
+/**
+ * Props for the CustomInput component.
+ * These props define the structure and behavior of the input field.
+ * @typedef {Object} CustomInputProps
+ * @property {string} id - The ID of the input field.
+ * @property {string} name - The name attribute of the input field.
+ * @property {string} label - The label text displayed above the input field.
+ * @property {string} [placeholder] - The placeholder text inside the input field.
+ * @property {boolean} [required] - Whether the input field is required or not.
+ * @property {'small' | 'medium'} [size] - The size variant of the input field.
+ * @property {string} [value] - The current value of the input field.
+ * @property {React.ChangeEventHandler<HTMLInputElement>} [onChange] - Event handler for input changes.
+ * @property {React.FocusEventHandler<HTMLInputElement>} [onBlur] - Event handler for input blur.
+ * @property {boolean} [error] - Indicates whether the input has an error state.
+ * @property {string} [className] - Additional CSS class names for customization.
+ * @property {string} [helperText] - Helper text to provide additional context or error messages.
+ */
 
+/**
+ * InputTextField component renders a labeled input field with customizable options.
+ * It utilizes Material-UI components for styling and functionality.
+ * @param {CustomInputProps} props - The props passed to the component.
+ * @returns {JSX.Element} - Rendered JSX element representing the input field.
+ */
 const InputTextField = ({
   id,
   name,
@@ -73,9 +90,10 @@ const InputTextField = ({
   error,
   className,
   helperText,
-}: CustomInputProps): JSX.Element => {
+}: InputFieldProps): JSX.Element => {
   return (
     <CustomInputWrapper>
+      {/* Label for the input field */}
       <Typography
         variant="body2"
         component="label"
@@ -84,7 +102,9 @@ const InputTextField = ({
         {label}
         {required && <span style={{color: 'red', marginLeft: 4}}>*</span>}
       </Typography>
-      <BootstrapInput
+
+      {/* Actual input field */}
+      <InputField
         id={id}
         type={type}
         name={name}
@@ -97,6 +117,8 @@ const InputTextField = ({
         onBlur={onBlur}
         sx={{border: error ? '1px solid red' : undefined}}
       />
+
+      {/* Helper text for validation or additional information */}
       {helperText && (
         <Typography
           variant="body2"

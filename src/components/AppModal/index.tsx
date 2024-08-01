@@ -1,18 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import CloseIcon from '@mui/icons-material/Close';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import VideoCameraBackOutlinedIcon from '@mui/icons-material/VideoCameraBackOutlined';
-import {Button, FormControl} from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import {DemoContainer, DemoItem} from '@mui/x-date-pickers/internals/demo';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {TimePicker} from '@mui/x-date-pickers/TimePicker';
-import AppButton from 'components/AppButton';
-import InputTextField from 'components/InputTextField';
 import {
   type AppModalPropsType,
   type WebinarDetailsType,
@@ -24,6 +12,12 @@ import {useFormik} from 'formik';
 import {ToasterMessage} from 'helpers/ToasterHelper';
 import * as React from 'react';
 import * as Yup from 'yup';
+
+import ModalBody from './ModalBody';
+import ModalFooter from './ModalFooter';
+import ModalHeader from './ModalHeader';
+
+// Styles for the modal
 const style = {
   position: 'absolute' as const,
   top: '50%',
@@ -37,6 +31,12 @@ const style = {
   height: '90vh',
 };
 
+/**
+ * Component representing a modal for creating or editing webinars.
+ *
+ * @param {AppModalPropsType} props - The properties for the modal component.
+ * @returns {JSX.Element} The rendered modal component.
+ */
 function AppModal({
   title,
   buttonText,
@@ -51,6 +51,7 @@ function AppModal({
     allWebinarDatas,
   } = useWebinarContext();
 
+  // Formik setup for form validation and submission
   const formValidation = useFormik({
     initialValues: {
       instructorName: editableData?.instructorName ?? '',
@@ -132,10 +133,14 @@ function AppModal({
       }
     },
   });
+
+  // Reset form and close modal
   const handleModalClose = (): void => {
     formValidation.resetForm();
     handleClose();
   };
+
+  // Update form values when editableData changes
   React.useEffect(() => {
     if (editableData) {
       void formValidation.setValues({
@@ -150,6 +155,12 @@ function AppModal({
       });
     }
   }, [editableData]);
+
+  // Submit form
+  const handleSubmit = (): void => {
+    formValidation.handleSubmit();
+  };
+
   return (
     <Modal
       keepMounted
@@ -160,333 +171,21 @@ function AppModal({
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description">
       <Box sx={style} className="modal_container">
-        <Box
-          className="modal_header"
-          sx={{
-            padding: '14px 22px',
-            borderBottom: '1px solid #E3E7EC',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}>
-          <Typography
-            variant="h6"
-            component="h2"
-            sx={{fontSize: '18px', fontWeight: '550'}}>
-            {title}
-          </Typography>
-          <CloseIcon
-            sx={{color: '#444952', fontSize: '24px', cursor: 'pointer'}}
-            onClick={handleModalClose}
-          />
-        </Box>
-        <Box className="modal_body" sx={{height: '400px', overflow: 'auto'}}>
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': {m: 1, width: '28ch'},
-            }}>
-            <Box
-              className="instructor_details"
-              sx={{display: 'flex', gap: '30px', padding: '14px 22px'}}>
-              <PeopleAltOutlinedIcon
-                sx={{color: '#444952', fontSize: '24px'}}
-              />
-              <Box sx={{flex: '1'}}>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  sx={{fontSize: '18px', fontWeight: '550'}}>
-                  Instructor Details
-                </Typography>
-                <FormControl sx={{marginTop: '7px', display: 'block'}}>
-                  <InputTextField
-                    id="instructorName"
-                    name="instructorName"
-                    label="Instructor Name"
-                    type="text"
-                    value={formValidation.values.instructorName}
-                    placeholder="Type the instructor name"
-                    onChange={formValidation.handleChange}
-                    onBlur={formValidation.handleBlur}
-                    className="form_inputs"
-                    size="small"
-                    error={
-                      (formValidation.touched.instructorName ?? false) &&
-                      Boolean(formValidation.errors.instructorName)
-                    }
-                    helperText={
-                      formValidation.touched.instructorName
-                        ? formValidation.errors.instructorName
-                        : undefined
-                    }
-                  />
-                </FormControl>
-                <FormControl sx={{marginTop: '7px', display: 'block'}}>
-                  <InputTextField
-                    id="instructorRole"
-                    name="instructorRole"
-                    label="Instructor Role"
-                    type="text"
-                    placeholder="Type the instructor role"
-                    value={formValidation.values.instructorRole}
-                    onChange={formValidation.handleChange}
-                    onBlur={formValidation.handleBlur}
-                    className="form_inputs"
-                    size="small"
-                    error={
-                      (formValidation.touched.instructorRole ?? false) &&
-                      Boolean(formValidation.errors.instructorRole)
-                    }
-                    helperText={
-                      formValidation.touched.instructorRole
-                        ? formValidation.errors.instructorRole
-                        : undefined
-                    }
-                  />
-                </FormControl>
-                <Box
-                  className="instructor_details_topic"
-                  sx={{display: 'flex', gap: '30px'}}>
-                  <FormControl
-                    sx={{marginTop: '7px', display: 'block', flex: '1'}}>
-                    <InputTextField
-                      id="instructorCompany"
-                      name="instructorCompany"
-                      label="Instructor Company"
-                      type="text"
-                      placeholder="Type the instructor company"
-                      value={formValidation.values.instructorCompany}
-                      onChange={formValidation.handleChange}
-                      onBlur={formValidation.handleBlur}
-                      className="form_inputs"
-                      size="small"
-                      error={
-                        (formValidation.touched.instructorCompany ?? false) &&
-                        Boolean(formValidation.errors.instructorCompany)
-                      }
-                      helperText={
-                        formValidation.touched.instructorCompany
-                          ? formValidation.errors.instructorCompany
-                          : undefined
-                      }
-                    />
-                  </FormControl>
-                  <FormControl
-                    sx={{marginTop: '7px', display: 'block', flex: '1'}}>
-                    <InputTextField
-                      id="topics"
-                      name="topics"
-                      label="Topics"
-                      type="text"
-                      placeholder="Type the topics"
-                      value={formValidation.values.topics}
-                      onChange={formValidation.handleChange}
-                      onBlur={formValidation.handleBlur}
-                      className="form_inputs"
-                      size="small"
-                      error={
-                        (formValidation.touched.topics ?? false) &&
-                        Boolean(formValidation.errors.topics)
-                      }
-                      helperText={
-                        formValidation.touched.topics
-                          ? formValidation.errors.topics
-                          : undefined
-                      }
-                    />
-                  </FormControl>
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              className="instructor_details"
-              sx={{
-                display: 'flex',
-                gap: '30px',
-                margin: '10px 0px',
-                padding: '14px 22px',
-              }}>
-              <VideoCameraBackOutlinedIcon
-                sx={{color: '#444952', fontSize: '24px'}}
-              />
-              <Box sx={{flex: '1'}}>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  sx={{fontSize: '18px', fontWeight: '550'}}>
-                  Webinar Details
-                </Typography>
-                <FormControl sx={{marginTop: '7px', display: 'block'}}>
-                  <InputTextField
-                    id="webinarTitle"
-                    name="webinarTitle"
-                    label="Webinar Title"
-                    type="text"
-                    placeholder="Type the webinar title"
-                    value={formValidation.values.webinarTitle}
-                    onChange={formValidation.handleChange}
-                    onBlur={formValidation.handleBlur}
-                    className="form_inputs"
-                    size="small"
-                    error={
-                      (formValidation.touched.webinarTitle ?? false) &&
-                      Boolean(formValidation.errors.webinarTitle)
-                    }
-                    helperText={
-                      formValidation.touched.webinarTitle
-                        ? formValidation.errors.webinarTitle
-                        : undefined
-                    }
-                  />
-                </FormControl>
+        {/* Modal Header */}
+        <ModalHeader title={title} onClose={handleModalClose} />
 
-                <FormControl
-                  sx={{marginTop: '7px'}}
-                  className="date_time_picker">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DatePicker']}>
-                      <DemoItem label="Start Date">
-                        <DatePicker
-                          value={
-                            formValidation.values.startDate
-                              ? dayjs(
-                                  formValidation.values.startDate,
-                                  'YYYY-MM-DD',
-                                )
-                              : null
-                          }
-                          onChange={async value => {
-                            const formattedDate = value?.format('YYYY-MM-DD');
-                            await formValidation.setFieldValue(
-                              'startDate',
-                              formattedDate,
-                            );
-                          }}
-                          disablePast={true}
-                          format="YYYY-MM-DD"
-                        />
-                      </DemoItem>
-                    </DemoContainer>
-                  </LocalizationProvider>
-                  {formValidation.touched.startDate && (
-                    <Typography
-                      variant="body2"
-                      color={
-                        (formValidation.touched.startDate ?? false) &&
-                        Boolean(formValidation.errors.startDate)
-                          ? 'error.main'
-                          : 'text.secondary'
-                      }
-                      sx={{marginTop: '3px', marginLeft: '10px'}}>
-                      {formValidation.errors.startDate}
-                    </Typography>
-                  )}
-                </FormControl>
-                <FormControl
-                  sx={{marginTop: '7px'}}
-                  className="date_time_picker">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['TimePicker']}>
-                      <DemoItem label="Start Time">
-                        <TimePicker
-                          value={
-                            formValidation.values.startTime
-                              ? dayjs(formValidation.values.startTime, 'HH:mm')
-                              : null
-                          }
-                          onChange={async value => {
-                            const formattedTime = value?.format('HH:mm'); // Formatting time
-                            await formValidation.setFieldValue(
-                              'startTime',
-                              formattedTime,
-                            );
-                          }}
-                          format="HH:mm"
-                        />
-                      </DemoItem>
-                    </DemoContainer>
-                  </LocalizationProvider>
-                  {formValidation.touched.startTime && (
-                    <Typography
-                      variant="body2"
-                      color={
-                        (formValidation.touched.startTime ?? false) &&
-                        Boolean(formValidation.errors.startTime)
-                          ? 'error.main'
-                          : 'text.secondary'
-                      }
-                      sx={{marginTop: '3px', marginLeft: '10px'}}>
-                      {formValidation.errors.startTime}
-                    </Typography>
-                  )}
-                </FormControl>
-                <FormControl
-                  sx={{marginTop: '7px'}}
-                  className="date_time_picker">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['TimePicker']}>
-                      <DemoItem label="End Time">
-                        <TimePicker
-                          value={
-                            formValidation.values.endTime
-                              ? dayjs(formValidation.values.endTime, 'HH:mm')
-                              : null
-                          }
-                          onChange={async value => {
-                            const formattedTime = value?.format('HH:mm'); // Formatting time
-                            await formValidation.setFieldValue(
-                              'endTime',
-                              formattedTime,
-                            );
-                          }}
-                          format="HH:mm"
-                        />
-                      </DemoItem>
-                    </DemoContainer>
-                  </LocalizationProvider>
-                  {formValidation.touched.endTime && (
-                    <Typography
-                      variant="body2"
-                      color={
-                        (formValidation.touched.endTime ?? false) &&
-                        Boolean(formValidation.errors.endTime)
-                          ? 'error.main'
-                          : 'text.secondary'
-                      }
-                      sx={{marginTop: '3px', marginLeft: '10px'}}>
-                      {formValidation.errors.endTime}
-                    </Typography>
-                  )}
-                </FormControl>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-        <Box
-          className="modal_footer_section"
-          sx={{
-            padding: '14px 22px',
-            borderTop: '1px solid #E3E7EC',
-            display: 'flex',
-            gap: '20px',
-          }}>
-          <AppButton type="button" onClick={formValidation.handleSubmit}>
-            {buttonText}
-          </AppButton>
-          <Button
-            sx={{
-              color: '#0E51F1',
-              fontSize: '18px',
-              fontWeight: '600',
-              textTransform: 'capitalize',
-            }}
-            onClick={handleModalClose}
-            size="small">
-            Cancel
-          </Button>
-        </Box>
+        {/* Modal Body */}
+        <ModalBody formValidation={formValidation} />
+
+        {/* Modal Footer */}
+        <ModalFooter
+          handleSubmit={handleSubmit}
+          handleClose={handleClose}
+          buttonText={buttonText}
+        />
       </Box>
     </Modal>
   );
 }
+
 export default AppModal;
