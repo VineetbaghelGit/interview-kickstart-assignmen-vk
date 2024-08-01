@@ -85,7 +85,12 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
     height: max-content !important;
     width: 90vw !important;
   }
-  .modal_body{
-    height: 70vh !important;
+  .modal_body {
+    height: 60vh !important;
+  }
+}
+@media (max-width: 600px) {
+  .app_card.css-1xp2hz5-MuiPaper-root-MuiCard-root {
+    width: 84vw !important;
   }
 }
