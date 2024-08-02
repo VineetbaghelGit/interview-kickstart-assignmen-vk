@@ -4,13 +4,19 @@
   outline: none;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif !important;
+  scrollbar-width: none; 
 }
 a {
   text-decoration: none !important;
 }
-.app_container {
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+
+::-webkit-scrollbar {
+  display: none;
+}
+.app_container,
+.MuiAppBar-positionFixed {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 form .MuiInputBase-sizeSmall.form_inputs {
   border: 1px solid #e3e7ec !important;
@@ -20,17 +26,20 @@ form .MuiInputBase-sizeSmall.form_inputs {
   height: 45px;
   font-size: 14px;
 }
-
+.required-asterisk::after {
+  content: ' *';
+  color: red;
+}
 form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   font-size: 13px;
   margin: 10px 0px;
   color: #000;
-  font-weight: 550;
+  font-weight: 600;
 }
 .date_time_picker p {
   font-size: 13px;
   color: #000;
-  font-weight: 550;
+  font-weight: 600;
 }
 .date_time_picker .css-nsl34v.MuiTextField-root {
   margin: 0;
@@ -55,6 +64,67 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
 .modal_body {
   height: 400px !important;
   overflow: auto !important;
+  padding: 20px 0px;
+}
+.image_upload_grid {
+  padding-top: 0px !important;
+}
+.image_upload_grid > div {
+  margin-top: 30px;
+}
+.image_upload_grid label {
+  border-radius: 18px !important;
+  border: 2px dashed #ccc !important;
+  width: 135px !important;
+  height: 135px !important;
+}
+input::placeholder {
+  color: #000 !important;
+  opacity: 1 !important;
+  font-size: 14px !important;
+}
+.css-nsl34v .MuiTextField-root {
+  width: 0ch !important;
+  margin-left: 0px !important;
+}
+.search_container input::placeholder {
+  color: #636973 !important;
+}
+.css-1stsujp-MuiFormControl-root {
+  border: none !important;
+  border-color: #e3e7ec !important;
+  outline: none !important;
+}
+
+.css-15m848y-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  border-color: #e3e7ec !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.css-15m848y-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root:hover
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #e3e7ec !important;
+  outline: none !important;
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-color: #e3e7ec !important;
+}
+select:hover {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: red !important;
+}
+.filter_container {
+  margin-top: 100px !important;
+}
+.search_container svg,
+.date_time_picker svg {
+  font-size: 20px !important;
+}
+.search_container button {
+  padding-right: 0px !important;
 }
 @media (max-width: 767px) {
   .search_container,
@@ -77,6 +147,9 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   .css-1m2ma82 {
     height: max-content !important;
   }
+  .css-nsl34v .MuiTextField-root {
+    width: 75vw !important;
+  }
   .date_time_picker > div > div > div > div {
     width: 75vw !important;
     overflow: hidden !important;
@@ -91,9 +164,20 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   }
   .modal_body {
     height: 65vh !important;
+    padding: 12px !important;
   }
-  .form_inputs_grid{
+  .form_inputs_grid {
     width: 100% !important;
+  }
+  .app_container,
+  .MuiAppBar-positionFixed {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media (min-width: 600px) {
+  .css-ndwowy-MuiToolbar-root {
+    min-height: 75px !important;
   }
 }
 @media (max-width: 576px) {
@@ -104,5 +188,8 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
 @media (min-height: 800px) and (min-width: 768px) {
   .modal_body {
     height: max-content !important;
+  }
+  .css-nsl34v .MuiTextField-root {
+    width: 0ch !important;
   }
 }

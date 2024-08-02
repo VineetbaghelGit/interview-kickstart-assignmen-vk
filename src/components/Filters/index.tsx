@@ -1,3 +1,4 @@
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'; // Importing custom dropdown arrow icon
 import SearchIcon from '@mui/icons-material/Search'; // Importing Search icon from Material-UI
 import {Box, FormControl, IconButton, InputBase, MenuItem} from '@mui/material'; // Importing Material-UI components
 import Select, {type SelectChangeEvent} from '@mui/material/Select'; // Importing Select component and type from Material-UI
@@ -65,6 +66,7 @@ function Filters({
 
   return (
     <Box
+      className="filter_container"
       sx={{
         margin: '30px 0px',
         display: 'flex',
@@ -111,16 +113,13 @@ function Filters({
               height: '45px',
               boxShadow: 'none',
               fontSize: '14px',
-              '&:hover': {
-                boxShadow: 'none',
-                border: 'none',
-              },
             }}
             value={selectedTopic}
             onChange={handleTopicChange}
+            IconComponent={KeyboardArrowDownIcon} // Custom icon for dropdown
             inputProps={{'aria-label': 'Topic selector'}}>
             <MenuItem value="All" sx={{fontSize: '14px'}}>
-              All Topics
+              Topic
             </MenuItem>
             {topicsList.map(topic => (
               <MenuItem key={topic} value={topic} sx={{fontSize: '14px'}}>

@@ -77,7 +77,7 @@ function Home(): JSX.Element {
         selectedTopic={selectedTopic}
         setSelectedTopic={setSelectedTopic}
       />
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{mb: 5}}>
         {showWebinarData?.length > 0 ? (
           // Map through the filtered webinars and render an AppCard for each
           showWebinarData?.map((webinar, index) => {

@@ -35,7 +35,7 @@ function Header(): JSX.Element {
       <Box sx={{flexGrow: 1}}>
         {/* AppBar component with custom styling */}
         <AppBar
-          position="static"
+          position="fixed"
           sx={{
             backgroundColor: '#fff',
             boxShadow: '0',

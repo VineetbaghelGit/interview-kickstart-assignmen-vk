@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
+import AddIcon from '@mui/icons-material/Add';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import VideoCameraBackOutlinedIcon from '@mui/icons-material/VideoCameraBackOutlined';
 import {FormControl, Grid} from '@mui/material';
@@ -13,7 +14,6 @@ import {TimePicker} from '@mui/x-date-pickers/TimePicker';
 import InputTextField from 'components/InputTextField';
 import dayjs from 'dayjs';
 import * as React from 'react';
-
 const ModalBody = ({formValidation}: any): JSX.Element => {
   const [instructorImage, setInstructorImage] = React.useState<string | null>(
     null,
@@ -67,6 +67,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                     name="instructorName"
                     label="Instructor Name"
                     type="text"
+                    required
                     value={formValidation.values.instructorName}
                     placeholder="Type the instructor name"
                     onChange={formValidation.handleChange}
@@ -90,6 +91,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                     id="instructorRole"
                     name="instructorRole"
                     label="Instructor Role"
+                    required
                     type="text"
                     placeholder="Type the instructor role"
                     value={formValidation.values.instructorRole}
@@ -110,13 +112,8 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                 </FormControl>
                 {/* Instructor Company and Topics Inputs */}
               </Grid>
-              <Grid item md={6}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}>
+              <Grid item md={6} className="image_upload_grid">
+                <Box>
                   <Typography
                     variant="h6"
                     component="h2"
@@ -152,7 +149,9 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                         style={{width: '100%', height: '100%'}}
                       />
                     ) : (
-                      <Typography sx={{color: '#ccc'}}>+</Typography>
+                      <Typography component="span" sx={{color: '#636973'}}>
+                        <AddIcon sx={{fontSize: '40px', fontWeight: 'bold'}} />
+                      </Typography>
                     )}
                   </Box>
                 </Box>
@@ -166,6 +165,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                     id="instructorCompany"
                     name="instructorCompany"
                     label="Instructor Company"
+                    required
                     type="text"
                     placeholder="Type the instructor company"
                     value={formValidation.values.instructorCompany}
@@ -186,12 +186,13 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                 </FormControl>
               </Grid>
               {/* Instructor Name Input */}
-              <Grid item md={6} className="form_inputs_grid">
+              <Grid item md={6} className="form_inputs_grid topic_input">
                 <FormControl sx={{display: 'block', flex: '1'}}>
                   <InputTextField
                     id="topics"
                     name="topics"
                     label="Topics"
+                    required
                     type="text"
                     placeholder="Type the topics"
                     value={formValidation.values.topics}
@@ -241,6 +242,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                 id="webinarTitle"
                 name="webinarTitle"
                 label="Webinar Title"
+                required
                 type="text"
                 placeholder="Type the webinar title"
                 value={formValidation.values.webinarTitle}
@@ -264,7 +266,12 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
             <FormControl sx={{marginTop: '7px'}} className="date_time_picker">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
-                  <DemoItem label="Start Date">
+                  <DemoItem
+                    label={
+                      <span>
+                        Start Date <span style={{color: 'red'}}>*</span>
+                      </span>
+                    }>
                     <DatePicker
                       value={
                         formValidation.values.startDate
@@ -278,6 +285,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                           formattedDate,
                         );
                       }}
+                      slotProps={{textField: {placeholder: 'Type start date'}}}
                       disablePast={true}
                       format="YYYY-MM-DD"
                     />
@@ -303,7 +311,12 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
             <FormControl sx={{marginTop: '7px'}} className="date_time_picker">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['TimePicker']}>
-                  <DemoItem label="Start Time">
+                  <DemoItem
+                    label={
+                      <span>
+                        Start Time <span style={{color: 'red'}}>*</span>
+                      </span>
+                    }>
                     <TimePicker
                       value={
                         formValidation.values.startTime
@@ -318,6 +331,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                         );
                       }}
                       format="HH:mm"
+                      slotProps={{textField: {placeholder: 'Type start time'}}}
                     />
                   </DemoItem>
                 </DemoContainer>
@@ -341,7 +355,12 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
             <FormControl sx={{marginTop: '7px'}} className="date_time_picker">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['TimePicker']}>
-                  <DemoItem label="End Time">
+                  <DemoItem
+                    label={
+                      <span>
+                        End Time <span style={{color: 'red'}}>*</span>
+                      </span>
+                    }>
                     <TimePicker
                       value={
                         formValidation.values.endTime
@@ -356,6 +375,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
                         );
                       }}
                       format="HH:mm"
+                      slotProps={{textField: {placeholder: 'Type end time'}}}
                     />
                   </DemoItem>
                 </DemoContainer>

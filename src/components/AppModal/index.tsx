@@ -23,7 +23,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '80vw',
+  width: '70vw',
   bgcolor: 'background.paper',
   border: '1px solid #E3E7EC',
   boxShadow: 24,
@@ -167,11 +167,17 @@ function AppModal({
 
   return (
     <Modal
-      keepMounted
       open={showModal}
       onClose={handleModalClose}
       closeAfterTransition
       sx={{width: '100%'}}
+      slotProps={{
+        backdrop: {
+          style: {
+            backdropFilter: 'blur(5px)',
+          },
+        },
+      }}
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description">
       <Box sx={style} className="modal_container">

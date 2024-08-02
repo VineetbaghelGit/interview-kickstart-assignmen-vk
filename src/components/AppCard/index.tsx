@@ -84,7 +84,7 @@ function AppCard({
     <Card
       className="app_card"
       sx={{
-        maxWidth: 400,
+        width: '100%',
         padding: '16px',
         borderRadius: '24px',
         boxShadow: '0px 20px 46px -24px rgba(0, 0, 0, 0.2)',
@@ -106,7 +106,7 @@ function AppCard({
               sx={{
                 fontSize: '18px',
                 mb: '5px',
-                fontWeight: '550',
+                fontWeight: '600',
                 lineHeight: '24px',
               }}
               component="p">
@@ -147,8 +147,8 @@ function AppCard({
             sx={{
               fontSize: '14px',
               mb: '4px',
-              fontWeight: '550',
-              lineHeight: '24px',
+              fontWeight: '600',
+              lineHeight: '26px',
               color: CardsColors[colorIndex],
             }}>
             {singleWebinarDetail.topics}
@@ -158,8 +158,8 @@ function AppCard({
             sx={{
               fontSize: '18px',
               mb: '4px',
-              fontWeight: '550',
-              lineHeight: '24px',
+              fontWeight: '600',
+              lineHeight: '26px',
               color: '#000',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
@@ -175,7 +175,7 @@ function AppCard({
               fontSize: '14px',
               mb: '4px',
               fontWeight: '550',
-              lineHeight: '24px',
+              lineHeight: '26px',
               color: '#2E333B',
             }}>
             {formatDateTime(
