@@ -23,54 +23,54 @@ form .MuiInputBase-sizeSmall.form_inputs {
   border-radius: 10px !important;
   background-color: #f2f4f8;
   color: #000 !important;
-  height: 45px;
-  font-size: 14px;
+  height: 45px !important;
+  font-size: 14px !important;
 }
 .required-asterisk::after {
-  content: ' *';
-  color: red;
+  content: ' *' !important;
+  color: red !important;
 }
 form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
-  font-size: 13px;
-  margin: 10px 0px;
-  color: #000;
-  font-weight: 600;
+  font-size: 13px !important;
+  margin: 10px 0px !important;
+  color: #000 !important;
+  font-weight: 600 !important;
 }
 .date_time_picker p {
-  font-size: 13px;
-  color: #000;
-  font-weight: 600;
+  font-size: 13px !important;
+  color: #000 !important;
+  font-weight: 600 !important;
 }
 .date_time_picker .css-nsl34v.MuiTextField-root {
-  margin: 0;
+  margin: 0 !important;
 }
 .date_time_picker > div > div > div > div {
   border: 1px solid #e3e7ec !important;
   border-radius: 10px !important;
-  background-color: #f2f4f8;
+  background-color: #f2f4f8 !important;
   color: #000 !important;
-  height: 45px;
-  font-size: 14px;
+  height: 45px !important;
+  font-size: 14px !important;
 }
 .date_time_picker .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:hover {
-  height: 45px;
-  font-size: 14px;
+  height: 45px !important;
+  font-size: 14px !important;
   outline: none !important;
 }
 .date_time_picker
   .MuiTypography-root.MuiTypography-body2.css-1ypinnx-MuiTypography-root {
-  color: #d32f2f;
+  color: #d32f2f !important;
 }
 .modal_body {
   height: 400px !important;
   overflow: auto !important;
-  padding: 20px 0px;
+  padding: 20px 0px !important;
 }
 .image_upload_grid {
   padding-top: 0px !important;
 }
 .image_upload_grid > div {
-  margin-top: 30px;
+  margin-top: 30px !important;
 }
 .image_upload_grid label {
   border-radius: 18px !important;
@@ -171,8 +171,8 @@ select:hover {
   }
   .app_container,
   .MuiAppBar-positionFixed {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
   }
 }
 @media (min-width: 600px) {
