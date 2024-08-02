@@ -4,7 +4,7 @@
   outline: none;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif !important;
-  scrollbar-width: none; 
+  scrollbar-width: none;
 }
 a {
   text-decoration: none !important;
@@ -30,7 +30,7 @@ form .MuiInputBase-sizeSmall.form_inputs {
   content: ' *' !important;
   color: red !important;
 }
-form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
+form label {
   font-size: 13px !important;
   margin: 10px 0px !important;
   color: #000 !important;
@@ -57,9 +57,10 @@ form .MuiTypography-root.MuiTypography-body2.css-18ukxow-MuiTypography-root {
   font-size: 14px !important;
   outline: none !important;
 }
-.date_time_picker
-  .MuiTypography-root.MuiTypography-body2.css-1ypinnx-MuiTypography-root {
+.date_time_picker .date_time_error {
   color: #d32f2f !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
 }
 .modal_body {
   height: 400px !important;
@@ -90,31 +91,24 @@ input::placeholder {
 .search_container input::placeholder {
   color: #636973 !important;
 }
-.css-1stsujp-MuiFormControl-root {
+/* .css-1stsujp-MuiFormControl-root {
   border: none !important;
   border-color: #e3e7ec !important;
+  outline: none !important;
+} */
+
+.select_box_container > div > div {
+  border-color: #e3e7ec !important;
+  border: none !important;
   outline: none !important;
 }
 
-.css-15m848y-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
-  border-color: #e3e7ec !important;
-  border: none !important;
-  outline: none !important;
-}
-
-.css-15m848y-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root:hover
-  .MuiOutlinedInput-notchedOutline {
+.select_box_container > div > div:hover fieldset {
   border-color: #e3e7ec !important;
   outline: none !important;
 }
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+fieldset {
   border-color: #e3e7ec !important;
-}
-select:hover {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: red !important;
 }
 .filter_container {
   margin-top: 100px !important;
@@ -176,7 +170,7 @@ select:hover {
   }
 }
 @media (min-width: 600px) {
-  .css-ndwowy-MuiToolbar-root {
+  .app_container header > div {
     min-height: 75px !important;
   }
 }

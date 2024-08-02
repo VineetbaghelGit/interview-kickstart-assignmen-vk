@@ -295,6 +295,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
               {formValidation.touched.startDate && (
                 <Typography
                   variant="body2"
+                  className="date_time_error"
                   color={
                     (formValidation.touched.startDate ?? false) &&
                     Boolean(formValidation.errors.startDate)
@@ -339,6 +340,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
               {formValidation.touched.startTime && (
                 <Typography
                   variant="body2"
+                  className="date_time_error"
                   color={
                     (formValidation.touched.startTime ?? false) &&
                     Boolean(formValidation.errors.startTime)
@@ -383,6 +385,7 @@ const ModalBody = ({formValidation}: any): JSX.Element => {
               {formValidation.touched.endTime && (
                 <Typography
                   variant="body2"
+                  className="date_time_error"
                   color={
                     (formValidation.touched.endTime ?? false) &&
                     Boolean(formValidation.errors.endTime)

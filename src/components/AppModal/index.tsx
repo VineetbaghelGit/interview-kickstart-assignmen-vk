@@ -23,7 +23,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '70vw',
+  width: '65vw',
   bgcolor: 'background.paper',
   border: '1px solid #E3E7EC',
   boxShadow: 24,
